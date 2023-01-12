@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, jsonify
+from pymongo import MongoClient
+from flask_socketio import SocketIO, send
+import bcrypt
+
 app = Flask(__name__)
 
-from pymongo import MongoClient
 client = MongoClient('mongodb+srv://test:sparta@cluster0.a1shctu.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db = client.dbsparta
 
@@ -17,7 +20,21 @@ def bucket_post():
 
 @app.route("/bucket/done", methods=["POST"])
 def bucket_done():
-    sample_receive = request.form['sample_give']
+    bucket_receive = request.form['bucket_give']
+
+    bucket_list = list(db.users.find({}, {'_id': False}))
+    count = len(bucket_list)
+
+    )
+
+    doc = {
+        'bucket':bucket_receive,
+        'num':count,
+        'deon':0
+
+    }
+    db.bucket.insert_one(doc)
+
     print(sample_receive)
     return jsonify({'msg': 'POST(완료) 연결 완료!'})
 
