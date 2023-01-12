@@ -90,15 +90,12 @@
             });
         }
         function save_bucket(){
-            let bucket = $('#bucket').val()
-
             $.ajax({
                 type: "POST",
                 url: "/bucket",
-                data: {sample_give:bucket},
+                data: {sample_give:'데이터전송'},
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.reload()
                 }
             });
         }

@@ -17,18 +17,8 @@ def bucket_post():
 
 @app.route("/bucket/done", methods=["POST"])
 def bucket_done():
-    bucket_receive = request.form['bucket_give']
-
-    bucket_list = list(db.users.find({}, {'_id': False}))
-    count = len(bucket_list)
-
-    doc = {
-        'num':count,
-        'bucket':bucket_receive,
-        'dome':0
-
-        }
-    db.bucket.insert_one(doc)
+    sample_receive = request.form['sample_give']
+    print(sample_receive)
     return jsonify({'msg': 'POST(완료) 연결 완료!'})
 
 @app.route("/bucket", methods=["GET"])
